@@ -5,12 +5,7 @@ const router = express.Router();
 // Importing the upload Object from the multer configuration
 const upload = require("../config/multer");
 
-const {
-  register,
-  login,
-  logout,
-  getLoggedinOrganization,
-} = require("../controllers/auth-organization");
+const { register, login, logout } = require("../controllers/auth-organization");
 
 const authenticate = require("../middlewaresOrga/authOrga");
 
