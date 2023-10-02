@@ -1,63 +1,70 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const cloudinary = require('../config/cloudinary');
-const fs = require('fs');
+const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
 
 const volunteerSchema = mongoose.Schema(
   {
-    volunteername: { type: String, required: [true, 'volunteername is Required!'] },
-    email: { type: String, unique: true, required: [true, 'email is Required!'] },
+    volunteername: {
+      type: String,
+      required: [true, "volunteername is Required!"],
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, "email is Required!"],
+    },
     password: {
       type: String,
-      minLength: [8, 'Password Must Be 8 characters or more!'],
-    //   required: [true, 'Password is Required!'],
+      minLength: [8, "Password Must Be 8 characters or more!"],
+      //   required: [true, 'Password is Required!'],
     },
-    skills:{type: [String], required: [true, 'Skill is Required!']},
-    contactInfo:{type: [String], required: [true, 'contact is Required!']},
-    description:{type: String, required: [true, 'Description is Required!']},
-    image:{type: String},
-    contactInfo:{type: String, required: [true, 'Description is Required!']}, 
-    projects: [{ type: mongoose.Types.ObjectId, ref: 'Project' }],
+    skills: { type: [String], required: [true, "Skill is Required!"] },
+    contactInfo: { type: [String], required: [true, "contact is Required!"] },
+    description: { type: String, required: [true, "Description is Required!"] },
+    image: { type: String },
+    contactInfo: { type: String, required: [true, "Description is Required!"] },
+    projects: [{ type: mongoose.Types.ObjectId, ref: "Project" }],
     decision: {
       type: String,
-      enum: ['Pending', 'Accepted', 'Denied'],
-      default: 'Pending',
-  },
-  status: {
+      enum: ["Pending", "Accepted", "Denied"],
+      default: "Pending",
+    },
+    status: {
       type: String,
-      enum: ['Applied', 'Accepted', 'Denied'],
-      default: 'Applied',
-  },
-  projectId: {
+      enum: ["Applied", "Accepted", "Denied"],
+      default: "Applied",
+    },
+    projectId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Project',
-  },
+      ref: "Project",
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 volunteerSchema
-  .virtual('confirmPassword')
+  .virtual("confirmPassword")
   .get(() => this._confirmPassword)
-  .set(value => (this._confirmPassword = value));
+  .set((value) => (this._confirmPassword = value));
 
-volunteerSchema.pre('validate', function (next) {
+volunteerSchema.pre("validate", function (next) {
   if (this.password !== this.confirmPassword) {
-    this.invalidate('confirmPassword', 'Password need to match!');
+    this.invalidate("confirmPassword", "Password need to match!");
   }
   next();
 });
-volunteerSchema.pre('save', async function (next) {
+volunteerSchema.pre("save", async function (next) {
   try {
     const hashedPassword = await bcrypt.hash(this.password, 6);
-    console.log("🚀 ~ file: volunteer.js:56 ~ hashedPassword:", hashedPassword)
+    console.log("🚀 ~ file: volunteer.js:56 ~ hashedPassword:", hashedPassword);
     this.password = hashedPassword;
     next();
   } catch (error) {
-    console.log('HASHING ERROR!!', error);
+    console.log("HASHING ERROR!!", error);
   }
 });
 
@@ -79,5 +86,5 @@ volunteerSchema.pre('save', async function (next) {
   }
 });*/
 
-const model = mongoose.model('Volunteer', volunteerSchema);
+const model = mongoose.model("Volunteer", volunteerSchema);
 module.exports = model;

@@ -1,35 +1,35 @@
-import CleaningImage from "../assets/Cleaning.jpg";
-import HomelessImage from "../assets/homeless.jpg";
-import EducationImage from "../assets/education.jpg";
-import AnimalWelfareImage from "../assets/animal-welfare.jpg";
-import DisasterReliefImage from "../assets/disaster-relief.jpg";
-import HealthcareSupportImage from "../assets/healthcare-support.jpg";
+import cleaning from "../assets/cleaning.png";
+import homeless from "../assets/homeless.png";
+import education from "../assets/education.png";
+import animalWelfare from "../assets/animalWelfare.png";
+import healthcareSupport from "../assets/healthcareSupport.png";
+import disasterRelief from "../assets/disasterRelief.png";
 import { useNavigate } from "react-router-dom";
 
 const causesData = [
   {
     title: "Environmental Conservation",
-    image: CleaningImage,
+    image: cleaning,
   },
   {
     title: "Homeless Shelter Support",
-    image: HomelessImage,
+    image: homeless, 
   },
   {
     title: "Youth Education and Mentorship",
-    image: EducationImage,
+    image: education, 
   },
   {
     title: "Animal Welfare",
-    image: AnimalWelfareImage,
+    image: animalWelfare,
   },
   {
     title: "Disaster Relief and Emergency Response",
-    image: DisasterReliefImage,
+    image: disasterRelief,
   },
   {
     title: "Healthcare Support",
-    image: HealthcareSupportImage,
+    image: healthcareSupport,
   },
 ];
 

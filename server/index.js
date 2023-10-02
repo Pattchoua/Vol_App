@@ -17,7 +17,7 @@ const authRouterOrga = require("./routes/auth-organization");
 // setting the portNumber
 const PORT = process.env.PORT || 8000;
 
-const path = require('path');
+const path = require("path");
 
 // Using the CORS Middelwares
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
@@ -27,27 +27,23 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Mounting volunteer/project/organization routers
-app.use('/api/projects', projectRouter);
-app.use('/api/volunteers', volunteerRouter);
-app.use('/api/organizations', organizationRouter);
-
-
+app.use("/api/projects", projectRouter);
+app.use("/api/volunteers", volunteerRouter);
+app.use("/api/organizations", organizationRouter);
 
 // Mounting authentication routers
 app.use("/auth", authRouter);
 app.use("/authOrga", authRouterOrga);
 
-
 // DEPLOYMENT
 // this need to be after all routes
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   //*Set static folder up in production
-  const buildPath = path.join(__dirname, '../client/dist');
+  const buildPath = path.join(__dirname, "../client/dist");
   app.use(express.static(buildPath));
 
-  app.get('*', (req, res) => res.sendFile(path.join(buildPath, 'index.html')));
+  app.get("*", (req, res) => res.sendFile(path.join(buildPath, "index.html")));
 }
-
 
 // database connection and server starting
 connectDB().then(() => {

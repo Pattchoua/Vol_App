@@ -1,8 +1,8 @@
 import TeamPic from "../assets/TeamPic.jpg";
-import PatrickImage from "../assets/patrickImage.jpeg";
-import RashmiImage from "../assets/rashmi1.jpg";
-import SheltonImage from "../assets/sheltonImage.jpeg";
-import ZornitsaImage from "../assets/zori.jpeg";
+import PatrickImage from "../assets/patrickImage.png";
+import RashmiImage from "../assets/rashmi1.png";
+import SheltonImage from "../assets/sheltonImage.png";
+import ZornitsaImage from "../assets/zori.png";
 import BackgroundImage from "../assets/background.png";
 
 const AboutUs = () => {
@@ -69,40 +69,40 @@ const AboutUs = () => {
                   <img
                     className="w-24 h-24 md:w-32 md:h-32 rounded-full"
                     src={PatrickImage}
-                    alt="Patrick"
+                    alt="Event Cordinator"
                   />
                   <p className="font-medium text-lg md:text-xl leading-5 text-gray-800 mt-4">
-                    Patrick
+                    Event Coordinator
                   </p>
                 </div>
                 <div className="p-4 pb-6 flex justify-center flex-col items-center">
                   <img
                     className="w-24 h-24 md:w-32 md:h-32 rounded-full"
                     src={RashmiImage}
-                    alt="Rashmi"
+                    alt="Administrative Assistant"
                   />
                   <p className="font-medium text-lg md:text-xl leading-5 text-gray-800 mt-4">
-                    Rashmi
+                    Administrative Assistant
                   </p>
                 </div>
                 <div className="p-4 pb-6 flex justify-center flex-col items-center">
                   <img
                     className="w-24 h-24 md:w-32 md:h-32 rounded-full"
                     src={SheltonImage}
-                    alt="Shelton"
+                    alt="Social Media Manager"
                   />
                   <p className="font-medium text-lg md:text-xl leading-5 text-gray-800 mt-4">
-                    Shelton
+                    Social Media Manager
                   </p>
                 </div>
                 <div className="p-4 pb-6 flex justify-center flex-col items-center">
                   <img
                     className="w-24 h-24 md:w-32 md:h-32 rounded-full"
                     src={ZornitsaImage}
-                    alt="Zornitsa"
+                    alt="Fundraising Coordinator"
                   />
                   <p className="font-medium text-lg md:text-xl leading-5 text-gray-800 mt-4">
-                    Zornitsa
+                    Fundraising Coordinator
                   </p>
                 </div>
               </div>
