@@ -4,85 +4,83 @@ import { useNavigate } from "react-router-dom";
 
 export const AuthContextOrg = createContext();
 
-
 const AuthProviderOrg = ({ children }) => {
+  const [organization, setOrganization] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState(null);
+  const navigate = useNavigate();
 
-    const [organization, setOrganization] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [errors, setErrors] = useState(null);
-    const navigate = useNavigate();
-
-    const setState = (organization, loading, errors) => {
+  const setState = (organization, loading, errors) => {
     setOrganization(organization);
     setLoading(loading);
     setErrors(errors);
-};
+  };
 
-// Fetch the current organization's data when the component mounts
-    useEffect(() => {
-        axios
-        .get("auth/currentOrganization")
-        .then((res) => setState(res.data.organization, false, null))
-        .catch((error) => {
+  // Fetch the current organization's data when the component mounts
+  useEffect(() => {
+    axios
+      .get("/auth/currentOrganization")
+      .then((res) => setState(res.data.organization, false, null))
+      .catch((error) => {
         setState(null, false, null);
-        });
-    }, []);
+      });
+  }, []);
 
-// Function to handle organization login
-const login = async (organization) => {
+  // Function to handle organization login
+  const login = async (organization) => {
     setLoading(true);
     try {
-        const res = await axios.post("authOrga/login", organization);
-        setState(res.data.organization, false, null);
-        navigate("/organizations/dashboard/organization");
+      const res = await axios.post("/authOrga/login", organization);
+      setState(res.data.organization, false, null);
+      navigate("/organizations/dashboard/organization");
     } catch (error) {
-        console.log(error.response);
-        setState(null, false, error.response.errors);
+      console.log(error.response);
+      setState(null, false, error.response.errors);
     }
-};
+  };
 
-// Function to handle organization registration
-const register = async (organization) => {
+  // Function to handle organization registration
+  const register = async (organization) => {
     setLoading(true);
     try {
-        const res = await axios.post("authOrga/register", organization);
-        setState(res.data.organization, false, null);
-        navigate("/login/organization");
+      const res = await axios.post("/authOrga/register", organization);
+      setState(res.data.organization, false, null);
+      navigate("/login/organization");
     } catch (error) {
-        console.log(error.response);
-        setState(null, false, error.response.errors);
+      console.log(error.response);
+      setState(null, false, error.response.errors);
     }
-};
+  };
 
-// Function to handle organization logout
-const Logout = async () => {
+  // Function to handle organization logout
+  const Logout = async () => {
     setLoading(true);
     try {
-        await axios.post("authOrga/logout", {});
-        setState(null, false, null);
-        navigate("/home");
-        window.location.reload();
+      await axios.post("/authOrga/logout", {});
+      setState(null, false, null);
+      navigate("/home");
+      window.location.reload();
     } catch (error) {
-        console.log(error.response);
-        setState(null, false, error.response.errors);
+      console.log(error.response);
+      setState(null, false, error.response.errors);
     }
-};
+  };
 
- // Provide the context values to child component
-return (
+  // Provide the context values to child component
+  return (
     <AuthContextOrg.Provider
-    value={{
+      value={{
         organization,
         loading,
         errors,
         login,
         register,
-        Logout
-    }}
+        Logout,
+      }}
     >
-        {children}
+      {children}
     </AuthContextOrg.Provider>
-);
+  );
 };
 
 export default AuthProviderOrg;
